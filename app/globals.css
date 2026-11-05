@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   TEMA WARNA — PetroChina x INDI
+   Warna didefinisikan sebagai CSS variables, lalu didaftarkan ke Tailwind
+   lewat @theme sehingga bisa dipakai sebagai kelas, mis. `bg-brand-red`,
+   `text-brand-gold`, `border-brand-charcoal/20`, dll.
+   (Tailwind v4: konfigurasi tema ada di file ini, bukan tailwind.config.js)
+   ========================================================================== */
+
+:root {
+  --brand-red: #c8102e; /* Merah utama */
+  --brand-dark: #8b0a14; /* Merah gelap — band/section gelap */
+  --brand-bright: #e31e24; /* Merah terang — hover/aksen */
+  --brand-gold: #ffc20e; /* Kuning emas — aksen, garis, badge, ikon */
+  --brand-charcoal: #111418; /* Hitam/charcoal — navbar, footer */
+  --brand-white: #ffffff; /* Putih */
+  --brand-light: #f4f4f5; /* Abu muda — section terang */
+}
+
+@theme inline {
+  --color-brand-red: var(--brand-red);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-bright: var(--brand-bright);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-charcoal: var(--brand-charcoal);
+  --color-brand-white: var(--brand-white);
+  --color-brand-light: var(--brand-light);
+
+  /* Font dari next/font (lihat app/layout.tsx) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-montserrat), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+}
+
+/* ==========================================================================
+   Dasar
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+  /* Ruang untuk navbar + progress bar timeline saat lompat ke anchor */
+  scroll-padding-top: 6.5rem;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (min-width: 1280px) {
+  html {
+    scroll-padding-top: 4.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--brand-white);
+  color: var(--brand-charcoal);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: var(--brand-gold);
+  color: var(--brand-charcoal);
+}
+
+/* Fokus keyboard yang jelas di semua latar */
+:focus-visible {
+  outline: 3px solid var(--brand-gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   Utilitas khas tema
+   ========================================================================== */
+
+/* Judul ala banner: Montserrat tebal, kapital, tracking rapat */
+@utility heading-display {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+}
+
+/* Bentuk jajar genjang untuk badge/label */
+@utility clip-parallelogram {
+  clip-path: polygon(0.75rem 0, 100% 0, calc(100% - 0.75rem) 100%, 0 100%);
+}
+
+/* Potongan diagonal di sisi atas section (miring ke kanan atas) */
+@utility clip-diagonal-top {
+  clip-path: polygon(0 var(--diagonal, 4rem), 100% 0, 100% 100%, 0 100%);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
