@@ -36,8 +36,8 @@ export default function DayTimeline({ days }: { days: TimelineDay[] }) {
             exit={{ opacity: 0, x: -16 }}
             transition={{ duration: 0.3 }}
           >
-            <ol className="flex flex-col items-center rounded-full bg-brand-charcoal/90 px-2 py-3 shadow-xl ring-1 ring-white/10 backdrop-blur">
-              <li aria-hidden="true" className="mb-2 font-heading text-[9px] font-extrabold tracking-[0.2em] text-brand-gold">
+            <ol className="flex flex-col items-center rounded-full border border-zinc-200 bg-white/95 px-1.5 py-3 shadow-lg shadow-black/5 backdrop-blur">
+              <li aria-hidden="true" className="mb-2 text-[9px] font-bold tracking-[0.2em] text-zinc-500">
                 DAY
               </li>
               {days.map((day, i) => {
@@ -49,24 +49,24 @@ export default function DayTimeline({ days }: { days: TimelineDay[] }) {
                         href={`#${day.id}`}
                         aria-label={`${day.label} – ${day.title}`}
                         aria-current={state === "active" ? "step" : undefined}
-                        className={`group relative flex h-9 w-9 items-center justify-center rounded-full font-heading text-sm font-black transition-colors duration-300 ${
+                        className={`group relative flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold transition-colors duration-300 ${
                           state === "active"
-                            ? "bg-brand-gold text-brand-charcoal"
+                            ? "bg-brand-red text-white"
                             : state === "done"
-                              ? "bg-brand-red text-white hover:bg-brand-bright"
-                              : "text-white/70 ring-1 ring-white/30 hover:text-white hover:ring-white/60"
+                              ? "bg-red-50 text-brand-red hover:bg-red-100"
+                              : "text-zinc-500 ring-1 ring-zinc-200 ring-inset hover:text-brand-charcoal"
                         }`}
                       >
                         {i + 1}
-                        <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-brand-charcoal px-2.5 py-1 font-sans text-xs font-semibold text-white opacity-0 shadow-lg transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+                        <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-brand-charcoal px-2.5 py-1 text-xs font-semibold text-white opacity-0 shadow-lg transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
                           {day.label} · {day.title}
                         </span>
                       </a>
                     </li>
                     {i < days.length - 1 ? (
-                      <li aria-hidden="true" className="relative my-1 h-10 w-[3px] overflow-hidden rounded-full bg-white/15">
+                      <li aria-hidden="true" className="relative my-1 h-9 w-0.5 overflow-hidden rounded-full bg-zinc-200">
                         <span
-                          className="absolute inset-0 origin-top bg-brand-gold transition-transform duration-150 ease-out"
+                          className="absolute inset-0 origin-top bg-brand-red transition-transform duration-150 ease-out"
                           style={{ transform: `scaleY(${fillFor(i)})` }}
                         />
                       </li>
@@ -85,7 +85,7 @@ export default function DayTimeline({ days }: { days: TimelineDay[] }) {
           <motion.nav
             key="timeline-mobile"
             aria-label="Progres kegiatan"
-            className="fixed inset-x-0 top-16 z-40 bg-brand-charcoal/95 shadow-md backdrop-blur xl:hidden"
+            className="fixed inset-x-0 top-16 z-40 border-b border-zinc-200 bg-white/95 backdrop-blur xl:hidden"
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
@@ -97,14 +97,14 @@ export default function DayTimeline({ days }: { days: TimelineDay[] }) {
                   <a
                     href={`#${day.id}`}
                     aria-current={i === index ? "step" : undefined}
-                    className={`relative block truncate px-1 pt-2 pb-2.5 text-center font-heading text-[11px] font-extrabold uppercase tracking-widest transition-colors ${
-                      i === index ? "text-brand-gold" : i < index ? "text-white" : "text-white/60"
+                    className={`relative block truncate px-1 pt-2 pb-2.5 text-center text-[11px] font-bold tracking-[0.14em] uppercase transition-colors ${
+                      i === index ? "text-brand-red" : i < index ? "text-brand-charcoal" : "text-zinc-500"
                     }`}
                   >
                     {day.label}
-                    <span aria-hidden="true" className="absolute inset-x-1 bottom-0 h-[3px] overflow-hidden rounded-full bg-white/15">
+                    <span aria-hidden="true" className="absolute inset-x-1 bottom-0 h-0.5 overflow-hidden rounded-full bg-zinc-200">
                       <span
-                        className="absolute inset-0 origin-left bg-brand-gold transition-transform duration-150 ease-out"
+                        className="absolute inset-0 origin-left bg-brand-red transition-transform duration-150 ease-out"
                         style={{ transform: `scaleX(${fillFor(i)})` }}
                       />
                     </span>

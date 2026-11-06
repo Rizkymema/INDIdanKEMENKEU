@@ -12,20 +12,27 @@ export default function Home() {
   // Link navbar dibuat otomatis dari data hari → menambah "day-4" langsung muncul di menu.
   const navLinks: NavLink[] = [
     { id: "beranda", label: "Beranda" },
-    ...days.map((day) => ({ id: day.id, label: day.label })),
+    // "DAY 1" → "Day 1" agar seragam dengan "Beranda" & "Kontak"
+    ...days.map((day) => ({ id: day.id, label: day.label.charAt(0) + day.label.slice(1).toLowerCase() })),
     { id: "kontak", label: "Kontak" },
   ];
 
   return (
     <>
-      <Navbar links={navLinks} logo={logos.organizer} organizer={event.organizer} />
+      <Navbar links={navLinks} logo={logos.organizer} />
 
       <main id="konten" tabIndex={-1} className="outline-none">
         <Hero
           event={event}
           clientLogo={logos.client}
           partners={logos.partners}
-          ctaTarget={days[0]?.id ?? "tentang"}
+          agenda={days.map((day) => ({
+            id: day.id,
+            label: day.label,
+            title: day.title,
+            sessions: day.sessions.map((s) => s.title),
+            photos: day.sessions.reduce((sum, s) => sum + s.photos.length, 0),
+          }))}
         />
 
         <Overview

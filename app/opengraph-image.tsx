@@ -20,43 +20,27 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "linear-gradient(135deg, #111418 0%, #2a0a0e 55%, #8B0A14 100%)",
+          background: "linear-gradient(115deg, #E31E24 0%, #C8102E 38%, #8B0A14 100%)",
           color: "#FFFFFF",
           padding: "64px 72px",
-          position: "relative",
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <div style={{ width: 56, height: 6, background: "#FFC20E" }} />
-          <div style={{ fontSize: 26, letterSpacing: 4, textTransform: "uppercase", color: "#FFC20E" }}>
-            {event.organizer}
-          </div>
+        <div style={{ display: "flex", fontSize: 22, letterSpacing: 6, textTransform: "uppercase", opacity: 0.9 }}>
+          {event.eyebrow}
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 104, fontWeight: 900, lineHeight: 1, textTransform: "uppercase", letterSpacing: -2 }}>
-            {event.title}
-          </div>
-          <div
-            style={{
-              display: "flex",
-              marginTop: 24,
-              alignSelf: "flex-start",
-              background: "#C8102E",
-              padding: "12px 28px",
-              fontSize: 48,
-              fontWeight: 800,
-              textTransform: "uppercase",
-            }}
-          >
-            {event.subtitle}
+          <div style={{ fontSize: 92, fontWeight: 800, lineHeight: 1.04, letterSpacing: -3 }}>{event.title}</div>
+          <div style={{ fontSize: 92, fontWeight: 800, lineHeight: 1.04, letterSpacing: -3 }}>{event.subtitle}</div>
+          <div style={{ display: "flex", marginTop: 24, fontSize: 30, opacity: 0.9 }}>
+            {event.organizer} · {event.location}
           </div>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", fontSize: 30 }}>
-          <div style={{ display: "flex", color: "rgba(255,255,255,0.9)" }}>{event.location}</div>
-          <div style={{ display: "flex", fontWeight: 900, color: "#FFC20E" }}>{event.hashtag}</div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 28 }}>
+          <div style={{ display: "flex", fontWeight: 800, letterSpacing: -1, fontSize: 40 }}>{event.client}</div>
+          <div style={{ display: "flex", fontWeight: 700 }}>{event.hashtag}</div>
         </div>
       </div>
     ),

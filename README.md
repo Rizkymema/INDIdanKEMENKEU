@@ -2,7 +2,7 @@
 
 Website one-page dokumentasi/galeri kegiatan **Training of Trainers – DDT Assessor PetroChina** di Jambi, diselenggarakan oleh **Indonesia Driving Institute (INDI)**. #safedrivesaveslives
 
-Dibangun dengan **Next.js 16 (App Router)**, **React 19**, **TypeScript**, **Tailwind CSS v4**, dan **Framer Motion**.
+Dibangun dengan **Next.js 16 (App Router)**, **React 19**, **TypeScript**, **Tailwind CSS v4**, dan **Framer Motion**. Gaya visual modern minimalis mengikuti dokumen INDI: header merah gradien dengan garis halus, panel putih bersih, dan font **Plus Jakarta Sans**.
 
 ---
 
@@ -67,7 +67,7 @@ Semua konten ada di **satu file**: `data/training.ts`. Komponen tidak perlu dise
 ### a. Teks utama
 | Bagian | Variabel di `data/training.ts` |
 |---|---|
-| Judul, lokasi, tanggal, hashtag, foto latar hero | `event` |
+| Judul, tagline, hashtag, foto latar hero, panel info (Pelaksanaan/tanggal, Lokasi, Peserta, Penyelenggara) | `event` (tanggal ada di `event.details`) |
 | Logo INDI, PetroChina, partner | `logos` |
 | Deskripsi program & 3 kartu statistik | `overview` |
 | Hari, sesi, dan foto | `days` |
@@ -139,8 +139,9 @@ Proyek ini memakai **Tailwind CSS v4**, sehingga konfigurasi tema ada di `app/gl
 :root {
   --brand-red: #c8102e;      /* Merah utama */
   --brand-dark: #8b0a14;     /* Merah gelap */
-  --brand-bright: #e31e24;   /* Merah terang (hover) */
-  --brand-gold: #ffc20e;     /* Kuning emas */
+  --brand-bright: #e31e24;   /* Merah terang (hover, awal gradien) */
+  --brand-maroon: #4a1418;   /* Merah kecokelatan (kartu bertingkat) */
+  --brand-gold: #ffc20e;     /* Kuning emas (aksen kecil) */
   --brand-charcoal: #111418; /* Charcoal */
   --brand-white: #ffffff;
   --brand-light: #f4f4f5;    /* Abu muda */
@@ -152,9 +153,9 @@ Proyek ini memakai **Tailwind CSS v4**, sehingga konfigurasi tema ada di `app/gl
 }
 ```
 
-Warna bisa dipakai sebagai kelas Tailwind: `bg-brand-red`, `text-brand-gold`, `border-brand-charcoal/20`, dll. Ubah nilai hex di `:root` untuk mengganti warna seluruh situs.
+Warna bisa dipakai sebagai kelas Tailwind: `bg-brand-red`, `text-brand-dark`, `border-brand-charcoal/20`, dll. Ubah nilai hex di `:root` untuk mengganti warna seluruh situs. Utilitas khas tema juga ada di file yang sama: `bg-brand-gradient` (gradien merah header), `heading-display` (judul tebal, tracking rapat), dan `eyebrow` (label kecil kapital).
 
-Font: **Montserrat 600–900** (judul, kelas `font-heading` / `heading-display`) dan **Inter 400–600** (isi), dimuat lewat `next/font/google` di `app/layout.tsx`.
+Font: **Plus Jakarta Sans** (200–800) untuk judul dan isi, dimuat lewat `next/font/google` di `app/layout.tsx`. Untuk mengganti font, ubah import `Plus_Jakarta_Sans` di file tersebut.
 
 ---
 

@@ -1,19 +1,20 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   TEMA WARNA — PetroChina x INDI
+   TEMA WARNA — PetroChina x INDI (gaya modern minimalis)
    Warna didefinisikan sebagai CSS variables, lalu didaftarkan ke Tailwind
    lewat @theme sehingga bisa dipakai sebagai kelas, mis. `bg-brand-red`,
-   `text-brand-gold`, `border-brand-charcoal/20`, dll.
+   `text-brand-dark`, `border-brand-charcoal/20`, dll.
    (Tailwind v4: konfigurasi tema ada di file ini, bukan tailwind.config.js)
    ========================================================================== */
 
 :root {
   --brand-red: #c8102e; /* Merah utama */
-  --brand-dark: #8b0a14; /* Merah gelap — band/section gelap */
+  --brand-dark: #8b0a14; /* Merah gelap */
   --brand-bright: #e31e24; /* Merah terang — hover/aksen */
-  --brand-gold: #ffc20e; /* Kuning emas — aksen, garis, badge, ikon */
-  --brand-charcoal: #111418; /* Hitam/charcoal — navbar, footer */
+  --brand-maroon: #4a1418; /* Merah kecokelatan — kartu bertingkat */
+  --brand-gold: #ffc20e; /* Kuning emas — aksen kecil */
+  --brand-charcoal: #111418; /* Hitam/charcoal — teks & footer */
   --brand-white: #ffffff; /* Putih */
   --brand-light: #f4f4f5; /* Abu muda — section terang */
 }
@@ -22,15 +23,14 @@
   --color-brand-red: var(--brand-red);
   --color-brand-dark: var(--brand-dark);
   --color-brand-bright: var(--brand-bright);
+  --color-brand-maroon: var(--brand-maroon);
   --color-brand-gold: var(--brand-gold);
   --color-brand-charcoal: var(--brand-charcoal);
   --color-brand-white: var(--brand-white);
   --color-brand-light: var(--brand-light);
 
   /* Font dari next/font (lihat app/layout.tsx) */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-montserrat), var(--font-inter), ui-sans-serif,
-    system-ui, sans-serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* ==========================================================================
@@ -64,43 +64,47 @@ body {
 }
 
 ::selection {
-  background-color: var(--brand-gold);
-  color: var(--brand-charcoal);
+  background-color: var(--brand-red);
+  color: var(--brand-white);
 }
 
-/* Fokus keyboard yang jelas di semua latar */
+/* Fokus keyboard yang jelas: merah di latar terang, putih di latar merah/gelap */
 :focus-visible {
-  outline: 3px solid var(--brand-gold);
+  outline: 2px solid var(--brand-red);
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+[data-surface="dark"] :focus-visible {
+  outline-color: var(--brand-white);
 }
 
 /* ==========================================================================
    Utilitas khas tema
    ========================================================================== */
 
-/* Judul ala banner: Montserrat tebal, kapital, tracking rapat */
+/* Judul: tebal, tracking rapat, huruf kapital di awal kata saja */
 @utility heading-display {
-  font-family: var(--font-heading);
-  font-weight: 900;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+/* Label kecil kapital dengan tracking lebar, mis. "FORM PENILAIAN PRAKTIK" */
+@utility eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
-  line-height: 0.95;
+  letter-spacing: 0.22em;
+  line-height: 1.4;
 }
 
-/* Bentuk jajar genjang untuk badge/label */
-@utility clip-parallelogram {
-  clip-path: polygon(0.75rem 0, 100% 0, calc(100% - 0.75rem) 100%, 0 100%);
-}
-
-/* Potongan diagonal di sisi atas section (miring ke kanan atas) */
-@utility clip-diagonal-top {
-  clip-path: polygon(0 var(--diagonal, 4rem), 100% 0, 100% 100%, 0 100%);
-}
-
-@utility no-scrollbar {
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+/* Gradien merah ala header dokumen INDI */
+@utility bg-brand-gradient {
+  background-image: linear-gradient(
+    115deg,
+    var(--brand-bright) 0%,
+    var(--brand-red) 38%,
+    var(--brand-dark) 100%
+  );
 }

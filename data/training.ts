@@ -56,6 +56,8 @@ export type Day = {
 export type Logo = {
   /** Nama lembaga — tampil sebagai teks placeholder jika `src` kosong. */
   name: string;
+  /** Teks kecil di samping nama (khusus placeholder logo penyelenggara). */
+  subtitle?: string;
   /** Path logo di folder public, contoh "/logos/bnsp.png". */
   src: string;
 };
@@ -99,18 +101,29 @@ export const site = {
 /* ------------------------------------------------------------------ */
 
 export const event = {
-  eyebrow: "Indonesia Driving Institute mempersembahkan",
+  eyebrow: "Dokumentasi Kegiatan",
   title: "Training of Trainers",
   subtitle: "DDT Assessor PetroChina",
+  /** Kalimat singkat di bawah judul hero. */
+  tagline: "Dokumentasi pelatihan teori & praktik bagi calon trainer dan assessor Defensive Driving.",
   organizer: "Indonesia Driving Institute (INDI)",
+  client: "PetroChina",
   location: "Jambi",
-  /** Contoh: "10 – 12 November 2026" */
-  date: "DD – DD Bulan 2026",
   hashtag: "#safedrivesaveslives",
-  /** Foto latar hero, contoh "/images/hero.jpg". Kosongkan untuk latar placeholder. */
+  /** Foto latar hero, contoh "/images/hero.jpg". Kosongkan untuk latar merah polos. */
   heroImage: "",
   heroImageAlt: "Suasana kegiatan Training of Trainers DDT Assessor PetroChina",
   ctaLabel: "Lihat Kegiatan",
+  /**
+   * Panel info di bawah judul hero (label kecil + nilai + keterangan).
+   * Isi tanggal kegiatan di baris "Pelaksanaan", contoh "10 – 12 November 2026".
+   */
+  details: [
+    { label: "Pelaksanaan", value: "DD – DD Bulan 2026", note: "3 hari · teori & praktik" },
+    { label: "Lokasi", value: "Jambi", note: "Kelas & area praktik" },
+    { label: "Peserta", value: "00 orang", note: "Calon trainer & assessor" },
+    { label: "Penyelenggara", value: "INDI", note: "Indonesia Driving Institute" },
+  ],
 };
 
 /* ------------------------------------------------------------------ */
@@ -119,7 +132,7 @@ export const event = {
 
 export const logos = {
   /** Logo penyelenggara — tampil di navbar & footer. */
-  organizer: { name: "INDI", src: "" } satisfies Logo,
+  organizer: { name: "INDI", subtitle: "Indonesia Driving Institute", src: "" } satisfies Logo,
   /** Logo klien — tampil besar di hero. */
   client: { name: "PetroChina", src: "" } satisfies Logo,
   /** Baris logo partner di bagian atas hero. Tambah/hapus sesuai kebutuhan. */

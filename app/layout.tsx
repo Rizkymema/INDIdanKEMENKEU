@@ -1,21 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { Inter, Montserrat } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import MotionProvider from "@/components/MotionProvider";
 import { event, site } from "@/data/training";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+/** Plus Jakarta Sans — sans-serif geometris modern (variable font 200–800). */
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-});
-
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
-  subsets: ["latin"],
-  weight: ["600", "700", "800", "900"],
   display: "swap",
 });
 
@@ -72,12 +65,12 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html
       lang="id"
-      className={`${inter.variable} ${montserrat.variable} antialiased`}
+      className={`${jakarta.variable} antialiased`}
     >
       <body className="min-h-dvh bg-white font-sans text-brand-charcoal">
         <a
           href="#konten"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-md focus:bg-brand-gold focus:px-4 focus:py-2 focus:font-semibold focus:text-brand-charcoal"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-md focus:bg-brand-red focus:px-4 focus:py-2 focus:font-semibold focus:text-white"
         >
           Lewati ke konten utama
         </a>

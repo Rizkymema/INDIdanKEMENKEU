@@ -1,135 +1,156 @@
 import Image from "next/image";
 import type { Logo } from "@/data/training";
 import CurvePattern from "./CurvePattern";
-import { ArrowDownIcon, BuildingIcon, CalendarIcon, MapPinIcon } from "./Icons";
+import { ArrowDownIcon, ChevronRightIcon } from "./Icons";
 import LogoSlot from "./LogoSlot";
 import Reveal from "./Reveal";
+
+type Detail = { label: string; value: string; note?: string };
+
+type AgendaItem = {
+  id: string;
+  label: string;
+  title: string;
+  sessions: string[];
+  photos: number;
+};
 
 type Props = {
   event: {
     eyebrow: string;
     title: string;
     subtitle: string;
-    organizer: string;
+    tagline: string;
+    client: string;
     location: string;
-    date: string;
-    hashtag: string;
     heroImage: string;
     heroImageAlt: string;
     ctaLabel: string;
+    details: Detail[];
   };
   clientLogo: Logo;
   partners: Logo[];
-  /** Anchor tujuan tombol CTA, mis. "day-1". */
-  ctaTarget: string;
+  /** Daftar isi (agenda per hari) di panel putih hero. */
+  agenda: AgendaItem[];
 };
 
-export default function Hero({ event, clientLogo, partners, ctaTarget }: Props) {
+/**
+ * Hero bergaya sampul dokumen INDI: header merah gradien dengan garis halus,
+ * lalu panel putih berisi info kegiatan dan daftar isi.
+ */
+export default function Hero({ event, clientLogo, partners, agenda }: Props) {
+  const ctaTarget = agenda[0]?.id ?? "tentang";
+
   return (
-    <section
-      id="beranda"
-      aria-labelledby="hero-title"
-      tabIndex={-1}
-      className="relative isolate outline-none flex min-h-[100svh] flex-col overflow-hidden bg-brand-charcoal text-white"
-    >
-      {/* Latar: foto (jika ada) atau placeholder bergaya tema */}
-      {event.heroImage ? (
-        <Image
-          src={event.heroImage}
-          alt={event.heroImageAlt}
-          fill
-          preload
-          sizes="100vw"
-          className="-z-20 object-cover"
-        />
-      ) : (
-        <div aria-hidden="true" className="absolute inset-0 -z-20 bg-linear-to-br from-[#2a0a0e] via-brand-charcoal to-brand-dark">
-          <CurvePattern className="text-brand-red opacity-30" />
-        </div>
-      )}
-      {/* Overlay gelap → merah */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-linear-to-b from-black/75 via-black/55 to-brand-dark/85"
-      />
-
-      <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 pt-24 pb-36 sm:px-6 sm:pt-28 sm:pb-44 lg:px-8">
-        {/* Baris logo partner */}
-        {partners.length > 0 ? (
-          <Reveal className="mb-8 flex flex-wrap items-center gap-2.5 sm:mb-10 sm:gap-4">
-            <span className="w-full text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70 sm:mr-1 sm:w-auto">
-              Didukung oleh
-            </span>
-            {partners.map((logo) => (
-              <LogoSlot key={logo.name} logo={logo} className="h-10 w-[6.5rem] sm:h-12 sm:w-32" tone="dark" />
-            ))}
-          </Reveal>
+    <section id="beranda" aria-labelledby="hero-title" tabIndex={-1} className="outline-none">
+      {/* Header merah */}
+      <div data-surface="dark" className="bg-brand-gradient relative isolate overflow-hidden text-white">
+        {event.heroImage ? (
+          <>
+            <Image
+              src={event.heroImage}
+              alt={event.heroImageAlt}
+              fill
+              preload
+              sizes="100vw"
+              className="-z-20 object-cover"
+            />
+            <div aria-hidden="true" className="bg-brand-gradient absolute inset-0 -z-10 opacity-[0.88]" />
+          </>
         ) : null}
+        <CurvePattern className="-z-10 text-white opacity-25" />
 
-        <Reveal delay={0.05}>
-          <LogoSlot logo={clientLogo} className="h-12 w-36 sm:h-14 sm:w-44" tone="dark" sizes="200px" />
-          <p className="mt-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-brand-gold sm:text-sm">
-            <span aria-hidden="true" className="h-0.5 w-10 bg-brand-gold" />
-            {event.eyebrow}
-          </p>
-        </Reveal>
+        <div className="mx-auto flex min-h-[72svh] max-w-6xl flex-col justify-end px-4 pt-28 pb-14 sm:px-6 sm:pb-16 lg:px-8">
+          {partners.length > 0 ? (
+            <Reveal className="mb-auto flex flex-wrap items-center gap-2 pb-10">
+              <span className="eyebrow mr-2 w-full text-white/75 sm:w-auto">Didukung oleh</span>
+              {partners.map((logo) => (
+                <LogoSlot key={logo.name} logo={logo} variant="chip" className="h-8 w-24" />
+              ))}
+            </Reveal>
+          ) : null}
 
-        <Reveal delay={0.12}>
-          <h1 id="hero-title" className="mt-5">
-            <span className="heading-display block text-[clamp(2.6rem,9.5vw,6.5rem)] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.45)]">
-              {event.title}
-            </span>
-            <span className="clip-parallelogram mt-4 inline-block bg-brand-red py-2 pr-8 pl-6 font-heading text-[clamp(1.1rem,3.6vw,2.4rem)] font-extrabold uppercase tracking-wide text-white shadow-xl">
-              {event.subtitle}
-            </span>
-          </h1>
-        </Reveal>
+          <Reveal delay={0.05}>
+            <LogoSlot logo={clientLogo} variant="box" className="h-11 w-36" sizes="180px" />
+            <p className="eyebrow mt-8 text-white/90">{event.eyebrow}</p>
+          </Reveal>
 
-        <Reveal delay={0.2}>
-          <ul className="mt-7 flex flex-col gap-2.5 text-sm text-white/90 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8 sm:text-base">
-            <li className="flex items-center gap-2">
-              <MapPinIcon className="h-5 w-5 text-brand-gold" />
-              <span>{event.location}</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <CalendarIcon className="h-5 w-5 text-brand-gold" />
-              <span>{event.date}</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <BuildingIcon className="h-5 w-5 text-brand-gold" />
-              <span>{event.organizer}</span>
-            </li>
-          </ul>
+          <Reveal delay={0.1}>
+            <h1 id="hero-title" className="heading-display mt-4 max-w-5xl text-[clamp(2.4rem,6.4vw,4.75rem)]">
+              <span className="block">{event.title}</span>
+              <span className="block">{event.subtitle}</span>
+            </h1>
+          </Reveal>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
-            <a
-              href={`#${ctaTarget}`}
-              className="group inline-flex items-center gap-3 rounded-lg bg-brand-gold px-6 py-3.5 font-heading text-sm font-extrabold uppercase tracking-wider text-brand-charcoal shadow-lg shadow-black/30 transition-colors hover:bg-white"
-            >
-              {event.ctaLabel}
-              <ArrowDownIcon className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
-            </a>
-            <a
-              href="#tentang"
-              className="inline-flex items-center rounded-lg px-5 py-3.5 font-heading text-sm font-bold uppercase tracking-wider text-white ring-1 ring-white/40 transition-colors hover:bg-white/10"
-            >
-              Tentang Program
-            </a>
-          </div>
-        </Reveal>
-      </div>
+          <Reveal delay={0.16}>
+            <p className="mt-5 max-w-2xl text-base font-medium text-white/90 sm:text-lg">{event.tagline}</p>
+            <p className="mt-2 text-sm text-white/75">
+              {event.client} · {event.location}
+            </p>
 
-      {/* Band merah diagonal di bagian bawah hero */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-32 sm:h-44">
-        <div className="absolute inset-0 bg-brand-gold [clip-path:polygon(0_52%,100%_0,100%_100%,0_100%)]" />
-        <div className="absolute inset-0 overflow-hidden bg-brand-red [clip-path:polygon(0_60%,100%_8%,100%_100%,0_100%)]">
-          <CurvePattern className="text-brand-dark opacity-60" lines={8} />
+            <div className="mt-9 flex flex-wrap items-center gap-3">
+              <a
+                href={`#${ctaTarget}`}
+                className="group inline-flex items-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-bold text-brand-red shadow-sm transition-colors hover:bg-brand-light"
+              >
+                {event.ctaLabel}
+                <ArrowDownIcon className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+              </a>
+              <a
+                href="#tentang"
+                className="inline-flex items-center rounded-md px-5 py-3 text-sm font-semibold text-white ring-1 ring-white/45 transition-colors ring-inset hover:bg-white/10"
+              >
+                Tentang Program
+              </a>
+            </div>
+          </Reveal>
         </div>
-        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-brand-dark [clip-path:polygon(0_45%,100%_0,100%_100%,0_100%)]" />
       </div>
-      <p className="pointer-events-none absolute right-4 bottom-4 font-heading text-sm font-black tracking-wide text-white sm:right-8 sm:bottom-6 sm:text-lg">
-        {event.hashtag}
-      </p>
+
+      {/* Panel putih: info kegiatan + daftar isi */}
+      <div className="border-b border-zinc-200 bg-white">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:px-6 sm:py-12 lg:grid-cols-12 lg:gap-12 lg:px-8">
+          <Reveal className="lg:col-span-5">
+            <dl className="grid grid-cols-2 gap-x-6 gap-y-7">
+              {event.details.map((d) => (
+                <div key={d.label}>
+                  <dt className="eyebrow text-[10px] text-zinc-500">{d.label}</dt>
+                  <dd className="mt-1.5 text-[15px] font-bold text-brand-charcoal">{d.value}</dd>
+                  {d.note ? <dd className="mt-0.5 text-xs text-zinc-500">{d.note}</dd> : null}
+                </div>
+              ))}
+            </dl>
+          </Reveal>
+
+          <Reveal delay={0.08} className="lg:col-span-7">
+            <nav aria-labelledby="isi-halaman">
+              <p id="isi-halaman" className="eyebrow text-[10px] text-zinc-500">
+                Isi halaman
+              </p>
+              <ol className="mt-3 divide-y divide-zinc-200 border-t border-zinc-200">
+                {agenda.map((item) => (
+                  <li key={item.id}>
+                    <a
+                      href={`#${item.id}`}
+                      className="group grid grid-cols-[3.5rem_1fr_auto] items-center gap-3 py-3 transition-colors hover:bg-brand-light/70"
+                    >
+                      <span className="pl-1 text-xs font-bold text-brand-red">{item.label}</span>
+                      <span className="min-w-0">
+                        <span className="block text-sm font-bold text-brand-charcoal">{item.title}</span>
+                        <span className="block truncate text-xs text-zinc-500">{item.sessions.join(" · ")}</span>
+                      </span>
+                      <span className="flex items-center gap-1 pr-1 text-xs font-semibold text-zinc-500 group-hover:text-brand-red">
+                        {item.photos} foto
+                        <ChevronRightIcon className="h-3.5 w-3.5" />
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </Reveal>
+        </div>
+      </div>
     </section>
   );
 }

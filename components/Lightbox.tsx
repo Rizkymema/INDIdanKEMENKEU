@@ -123,7 +123,8 @@ export default function Lightbox({ photos, index, direction, title, onClose, onN
           role="dialog"
           aria-modal="true"
           aria-label={`Galeri foto${title ? ` ${title}` : ""}`}
-          className="fixed inset-0 z-[100] flex flex-col bg-black/90 backdrop-blur-sm"
+          data-surface="dark"
+          className="fixed inset-0 z-[100] flex flex-col bg-[#0c0d10]/95 backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -140,9 +141,9 @@ export default function Lightbox({ photos, index, direction, title, onClose, onN
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex min-w-0 items-center gap-3">
-              <span className="h-5 w-1 shrink-0 rounded-full bg-brand-gold" aria-hidden="true" />
+              <span className="h-4 w-0.5 shrink-0 rounded-full bg-brand-bright" aria-hidden="true" />
               {title ? (
-                <p className="truncate font-heading text-sm font-extrabold uppercase tracking-wider">{title}</p>
+                <p className="truncate text-sm font-bold">{title}</p>
               ) : null}
               <p className="shrink-0 text-sm text-white/70" aria-live="polite">
                 {index + 1} / {total}
@@ -257,7 +258,7 @@ export default function Lightbox({ photos, index, direction, title, onClose, onN
               >
                 <ChevronLeftIcon className="h-6 w-6" />
               </button>
-              <p className="text-xs uppercase tracking-widest text-white/60">Geser untuk pindah</p>
+              <p className="text-xs text-white/60">Geser untuk pindah</p>
               <button
                 type="button"
                 onClick={next}

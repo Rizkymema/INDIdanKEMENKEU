@@ -15,18 +15,17 @@ type Props = {
   order: number;
   /** Label hari, mis. "DAY 2" — dipakai di judul lightbox. */
   dayLabel: string;
-  tone?: "light" | "dark";
 };
 
 /** Satu sesi: judul, deskripsi, dan galeri foto + lightbox. */
-export default function SessionGallery({ session, anchorId, order, dayLabel, tone = "light" }: Props) {
+export default function SessionGallery({ session, anchorId, order, dayLabel }: Props) {
   const [view, setView] = useState<{ index: number | null; direction: number }>({
     index: null,
     direction: 1,
   });
-  const isDark = tone === "dark";
   const photos = session.photos;
   const hasFeatured = photos.length >= 3;
+  const number = String(order + 1).padStart(2, "0");
 
   const close = useCallback(() => setView((v) => ({ ...v, index: null })), []);
   const navigate = useCallback(
@@ -41,44 +40,33 @@ export default function SessionGallery({ session, anchorId, order, dayLabel, ton
 
   return (
     <article id={anchorId} aria-labelledby={`${anchorId}-title`} className="scroll-mt-28 xl:scroll-mt-20">
-      <Reveal className="mb-6 flex flex-col gap-4 sm:mb-8 md:flex-row md:items-end md:justify-between md:gap-10">
-        <div className="flex items-start gap-4">
-          <span
-            aria-hidden="true"
-            className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-lg font-heading text-lg font-black shadow-md ${
-              isDark ? "bg-brand-gold text-brand-charcoal" : "bg-brand-red text-white"
-            }`}
-          >
-            {String(order + 1).padStart(2, "0")}
-          </span>
-          <div>
-            <p
-              className={`font-heading text-xs font-bold uppercase tracking-[0.2em] ${
-                isDark ? "text-brand-gold" : "text-brand-red"
-              }`}
+      <Reveal>
+        {/* Label sesi + garis tipis, seperti judul blok di form INDI */}
+        <div className="flex items-center gap-4">
+          <span className="eyebrow text-brand-red">Sesi {number}</span>
+          <span aria-hidden="true" className="h-px flex-1 bg-zinc-200" />
+          <span className="text-xs font-semibold text-zinc-500">{photos.length} foto</span>
+        </div>
+
+        <div className="mt-5 mb-8 grid gap-3 md:grid-cols-12 md:gap-10">
+          <div className="flex items-center gap-3 md:col-span-4">
+            <span
+              aria-hidden="true"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-charcoal text-xs font-bold text-white"
             >
-              Sesi {order + 1}
-            </p>
-            <h3
-              id={`${anchorId}-title`}
-              className={`heading-display mt-1 text-2xl sm:text-3xl ${isDark ? "text-white" : "text-brand-charcoal"}`}
-            >
+              {order + 1}
+            </span>
+            <h3 id={`${anchorId}-title`} className="heading-display text-2xl text-brand-charcoal sm:text-[1.75rem]">
               {session.title}
             </h3>
           </div>
+          <p className="text-[15px] leading-relaxed text-zinc-600 md:col-span-8">{session.description}</p>
         </div>
-        <p
-          className={`max-w-xl text-[15px] leading-relaxed md:text-right ${
-            isDark ? "text-white/85" : "text-zinc-600"
-          }`}
-        >
-          {session.description}
-        </p>
       </Reveal>
 
       {photos.length > 0 ? (
         <ul
-          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6"
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5"
           aria-label={`Galeri foto ${session.title}`}
         >
           {photos.map((photo, i) => {
@@ -87,7 +75,7 @@ export default function SessionGallery({ session, anchorId, order, dayLabel, ton
               <Reveal
                 as="li"
                 key={`${photo.src || "placeholder"}-${i}`}
-                delay={Math.min(i, 5) * 0.06}
+                delay={Math.min(i, 5) * 0.05}
                 className={featured ? "sm:col-span-2 lg:row-span-2" : undefined}
               >
                 <PhotoCard
@@ -95,7 +83,6 @@ export default function SessionGallery({ session, anchorId, order, dayLabel, ton
                   index={i}
                   label={session.title}
                   featured={featured}
-                  tone={tone}
                   onOpen={() => setView({ index: i, direction: 1 })}
                 />
               </Reveal>
@@ -103,11 +90,7 @@ export default function SessionGallery({ session, anchorId, order, dayLabel, ton
           })}
         </ul>
       ) : (
-        <div
-          className={`flex items-center gap-3 rounded-xl border border-dashed p-6 text-sm ${
-            isDark ? "border-white/25 text-white/75" : "border-zinc-300 text-zinc-500"
-          }`}
-        >
+        <div className="flex items-center gap-3 rounded-lg border border-dashed border-zinc-300 p-6 text-sm text-zinc-500">
           <CameraIcon className="h-5 w-5 shrink-0" />
           Foto untuk sesi ini belum ditambahkan.
         </div>

@@ -13,7 +13,6 @@ type Props = {
   label?: string;
   /** Foto unggulan: tampil lebih besar di grid. */
   featured?: boolean;
-  tone?: "light" | "dark";
   onOpen?: () => void;
 };
 
@@ -22,37 +21,28 @@ export function PhotoPlaceholder({ large = false }: { large?: boolean }) {
   return (
     <span
       aria-hidden="true"
-      className="absolute inset-0 flex flex-col items-center justify-center gap-3 overflow-hidden bg-linear-to-br from-brand-dark via-[#6d0710] to-brand-charcoal text-white"
+      className="bg-brand-gradient absolute inset-0 flex flex-col items-center justify-center gap-3 overflow-hidden text-white"
     >
-      <CurvePattern className="text-brand-red opacity-40" lines={10} />
+      <CurvePattern className="text-white opacity-20" lines={large ? 34 : 26} />
       <span
-        className={`relative flex items-center justify-center rounded-full border-2 border-brand-gold/70 bg-black/20 text-brand-gold ${
-          large ? "h-20 w-20" : "h-14 w-14"
+        className={`relative flex items-center justify-center rounded-full border border-white/50 ${
+          large ? "h-16 w-16" : "h-12 w-12"
         }`}
       >
-        <CameraIcon className={large ? "h-9 w-9" : "h-6 w-6"} />
+        <CameraIcon className={large ? "h-7 w-7" : "h-5 w-5"} strokeWidth={1.6} />
       </span>
-      <span
-        className={`relative font-heading font-bold uppercase tracking-widest text-white/90 ${
-          large ? "text-sm" : "text-[11px]"
-        }`}
-      >
+      <span className={`relative font-semibold text-white/90 ${large ? "text-sm" : "text-xs"}`}>
         Foto akan ditambahkan
       </span>
     </span>
   );
 }
 
-export default function PhotoCard({ photo, index, label, featured = false, tone = "light", onOpen }: Props) {
-  const isDark = tone === "dark";
+export default function PhotoCard({ photo, index, label, featured = false, onOpen }: Props) {
   const number = String(index + 1).padStart(2, "0");
 
   return (
-    <figure
-      className={`group flex h-full flex-col overflow-hidden rounded-xl shadow-lg shadow-black/10 ring-1 transition-shadow duration-300 hover:shadow-xl ${
-        isDark ? "bg-white/[0.06] ring-white/10 hover:shadow-black/30" : "bg-white ring-black/5 hover:shadow-black/15"
-      }`}
-    >
+    <figure className="group flex h-full flex-col overflow-hidden rounded-lg border border-zinc-200 bg-white transition-[border-color,box-shadow] duration-300 hover:border-zinc-300 hover:shadow-lg hover:shadow-black/5">
       <button
         type="button"
         onClick={onOpen}
@@ -73,7 +63,7 @@ export default function PhotoCard({ photo, index, label, featured = false, tone 
                 ? "(min-width: 1024px) 66vw, 100vw"
                 : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             }
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
           />
         ) : (
           <PhotoPlaceholder large={featured} />
@@ -82,31 +72,22 @@ export default function PhotoCard({ photo, index, label, featured = false, tone 
         {/* Overlay gradient gelap → merah di bagian bawah */}
         <span
           aria-hidden="true"
-          className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-brand-dark/95 via-brand-dark/40 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-100"
+          className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-brand-dark/85 via-brand-dark/25 to-transparent"
         />
 
-        <span aria-hidden="true" className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4 text-left">
-          <span className="flex items-center gap-2">
-            <span className="h-4 w-1 rounded-full bg-brand-gold" />
-            <span className="font-heading text-xs font-extrabold uppercase tracking-widest text-white">
-              {label ? `${label} · ` : ""}
-              {number}
-            </span>
+        <span aria-hidden="true" className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-3.5 text-left">
+          <span className="text-xs font-semibold text-white">
+            {label ? `${label} · ` : ""}
+            {number}
           </span>
-          <span className="flex h-9 w-9 translate-y-1 items-center justify-center rounded-full bg-brand-gold text-brand-charcoal opacity-0 shadow-md transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-brand-red opacity-0 shadow-sm transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
             <ZoomIcon className="h-4 w-4" />
           </span>
         </span>
       </button>
 
       {photo.caption ? (
-        <figcaption
-          className={`flex-none px-4 py-3.5 text-sm leading-relaxed ${
-            isDark ? "text-white/85" : "text-zinc-600"
-          }`}
-        >
-          {photo.caption}
-        </figcaption>
+        <figcaption className="flex-none px-4 py-3 text-sm leading-relaxed text-zinc-600">{photo.caption}</figcaption>
       ) : null}
     </figure>
   );
