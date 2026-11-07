@@ -27,7 +27,7 @@ const TILE_COLORS = [
 export default function Overview({ eyebrow, heading, paragraphs, stats }: Props) {
   return (
     <section id="tentang" aria-labelledby="tentang-title" className="bg-white py-20 sm:py-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 xl:px-15">
         <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
           <Reveal className="lg:col-span-5">
             <p className="eyebrow text-brand-red">{eyebrow}</p>
@@ -36,7 +36,7 @@ export default function Overview({ eyebrow, heading, paragraphs, stats }: Props)
             </h2>
           </Reveal>
 
-          <Reveal delay={0.08} className="space-y-4 text-base leading-relaxed text-zinc-600 sm:text-[17px] lg:col-span-7 lg:pt-9">
+          <Reveal delay={0.08} className="space-y-4 text-base leading-relaxed text-zinc-600 sm:text-[1.0625rem] lg:col-span-7 lg:pt-9">
             {paragraphs.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
@@ -64,8 +64,8 @@ export default function Overview({ eyebrow, heading, paragraphs, stats }: Props)
                     </p>
                     <Icon className="h-5 w-5 shrink-0 text-white/60" />
                   </div>
-                  <h3 className="mt-auto pt-6 text-[15px] font-bold">{stat.label}</h3>
-                  <p className="mt-1 text-[13px] leading-relaxed text-white/80">{stat.description}</p>
+                  <h3 className="mt-auto pt-6 text-[0.9375rem] font-bold">{stat.label}</h3>
+                  <p className="mt-1 text-[0.8125rem] leading-relaxed text-white/80">{stat.description}</p>
                 </Reveal>
               );
             })}

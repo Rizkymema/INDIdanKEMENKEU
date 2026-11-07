@@ -60,7 +60,7 @@ export default function Hero({ event, clientLogo, partners, agenda }: Props) {
         ) : null}
         <CurvePattern className="-z-10 text-white opacity-25" />
 
-        <div className="mx-auto flex min-h-[72svh] max-w-6xl flex-col justify-end px-4 pt-28 pb-14 sm:px-6 sm:pb-16 lg:px-8">
+        <div className="mx-auto flex min-h-[72svh] max-w-6xl flex-col justify-end px-4 pt-28 pb-14 sm:px-6 sm:pb-16 lg:px-8 xl:px-15">
           {partners.length > 0 ? (
             <Reveal className="mb-auto flex flex-wrap items-center gap-2 pb-10">
               <span className="eyebrow mr-2 w-full text-white/75 sm:w-auto">Didukung oleh</span>
@@ -71,7 +71,7 @@ export default function Hero({ event, clientLogo, partners, agenda }: Props) {
           ) : null}
 
           <Reveal delay={0.05}>
-            <LogoSlot logo={clientLogo} variant="box" className="h-11 w-36" sizes="180px" />
+            <LogoSlot logo={clientLogo} variant="box" className="h-11 w-36" sizes="360px" />
             <p className="eyebrow mt-8 text-white/90">{event.eyebrow}</p>
           </Reveal>
 
@@ -109,13 +109,13 @@ export default function Hero({ event, clientLogo, partners, agenda }: Props) {
 
       {/* Panel putih: info kegiatan + daftar isi */}
       <div className="border-b border-zinc-200 bg-white">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:px-6 sm:py-12 lg:grid-cols-12 lg:gap-12 lg:px-8">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:px-6 sm:py-12 lg:grid-cols-12 lg:gap-12 lg:px-8 xl:px-15">
           <Reveal className="lg:col-span-5">
             <dl className="grid grid-cols-2 gap-x-6 gap-y-7">
               {event.details.map((d) => (
                 <div key={d.label}>
-                  <dt className="eyebrow text-[10px] text-zinc-500">{d.label}</dt>
-                  <dd className="mt-1.5 text-[15px] font-bold text-brand-charcoal">{d.value}</dd>
+                  <dt className="eyebrow text-[0.625rem] text-zinc-500">{d.label}</dt>
+                  <dd className="mt-1.5 text-[0.9375rem] font-bold text-brand-charcoal">{d.value}</dd>
                   {d.note ? <dd className="mt-0.5 text-xs text-zinc-500">{d.note}</dd> : null}
                 </div>
               ))}
@@ -124,7 +124,7 @@ export default function Hero({ event, clientLogo, partners, agenda }: Props) {
 
           <Reveal delay={0.08} className="lg:col-span-7">
             <nav aria-labelledby="isi-halaman">
-              <p id="isi-halaman" className="eyebrow text-[10px] text-zinc-500">
+              <p id="isi-halaman" className="eyebrow text-[0.625rem] text-zinc-500">
                 Isi halaman
               </p>
               <ol className="mt-3 divide-y divide-zinc-200 border-t border-zinc-200">

@@ -59,7 +59,7 @@ export default function Navbar({ links, logo }: Props) {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <nav aria-label="Navigasi utama" className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <nav aria-label="Navigasi utama" className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 xl:px-15">
         <a href="#beranda" className="flex min-w-0 items-center rounded" onClick={() => setOpen(false)}>
           <LogoSlot logo={logo} variant="wordmark" tone={solid ? "dark" : "light"} className="h-9 w-28" />
         </a>
@@ -73,7 +73,7 @@ export default function Navbar({ links, logo }: Props) {
                 <a
                   href={`#${link.id}`}
                   aria-current={active ? "true" : undefined}
-                  className={`relative block rounded-md px-3 py-2 text-[13px] font-semibold transition-colors ${
+                  className={`relative block rounded-md px-3 py-2 text-[0.8125rem] font-semibold transition-colors ${
                     solid
                       ? active
                         ? "text-brand-red"
@@ -136,7 +136,7 @@ export default function Navbar({ links, logo }: Props) {
                       href={`#${link.id}`}
                       aria-current={active ? "true" : undefined}
                       onClick={() => setOpen(false)}
-                      className={`flex items-center justify-between rounded-md px-3 py-3 text-[15px] font-semibold transition-colors ${
+                      className={`flex items-center justify-between rounded-md px-3 py-3 text-[0.9375rem] font-semibold transition-colors ${
                         active ? "bg-red-50 text-brand-red" : "text-brand-charcoal hover:bg-zinc-50"
                       }`}
                     >

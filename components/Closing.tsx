@@ -20,7 +20,7 @@ export default function Closing({ eyebrow, hashtag, message }: Props) {
     >
       <CurvePattern className="-z-10 text-white opacity-25" lines={40} />
 
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 xl:px-15">
         <Reveal>
           <p className="eyebrow text-white/85">{eyebrow}</p>
           <h2

@@ -56,7 +56,7 @@ export default function Footer({
 
   return (
     <footer id="kontak" aria-labelledby="kontak-title" data-surface="dark" className="bg-brand-charcoal text-white">
-      <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-12 lg:px-8 lg:py-20">
+      <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-12 lg:px-8 xl:px-15 lg:py-20">
         <div className="lg:col-span-5">
           <LogoSlot logo={logo} variant="wordmark" tone="light" className="h-12 w-32" />
           <p className="mt-6 max-w-md text-sm leading-relaxed text-white/70">{about}</p>
@@ -106,7 +106,7 @@ export default function Footer({
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-15">
           <p>
             © {copyrightYear} {copyrightName}. Seluruh hak cipta dilindungi.
           </p>

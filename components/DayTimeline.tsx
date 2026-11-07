@@ -30,14 +30,14 @@ export default function DayTimeline({ days }: { days: TimelineDay[] }) {
           <motion.nav
             key="timeline-desktop"
             aria-label="Timeline kegiatan"
-            className="fixed left-5 top-1/2 z-40 hidden -translate-y-1/2 xl:block"
+            className="fixed left-3 top-1/2 z-40 hidden -translate-y-1/2 xl:block"
             initial={{ opacity: 0, x: -16 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -16 }}
             transition={{ duration: 0.3 }}
           >
-            <ol className="flex flex-col items-center rounded-full border border-zinc-200 bg-white/95 px-1.5 py-3 shadow-lg shadow-black/5 backdrop-blur">
-              <li aria-hidden="true" className="mb-2 text-[9px] font-bold tracking-[0.2em] text-zinc-500">
+            <ol className="flex flex-col items-center rounded-full border border-zinc-200 bg-white/95 px-1 py-3 shadow-lg shadow-black/5 backdrop-blur">
+              <li aria-hidden="true" className="mb-2 text-[0.5625rem] font-bold tracking-[0.2em] text-zinc-500">
                 DAY
               </li>
               {days.map((day, i) => {
@@ -49,7 +49,7 @@ export default function DayTimeline({ days }: { days: TimelineDay[] }) {
                         href={`#${day.id}`}
                         aria-label={`${day.label} – ${day.title}`}
                         aria-current={state === "active" ? "step" : undefined}
-                        className={`group relative flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold transition-colors duration-300 ${
+                        className={`group relative flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold transition-colors duration-300 ${
                           state === "active"
                             ? "bg-brand-red text-white"
                             : state === "done"
@@ -97,7 +97,7 @@ export default function DayTimeline({ days }: { days: TimelineDay[] }) {
                   <a
                     href={`#${day.id}`}
                     aria-current={i === index ? "step" : undefined}
-                    className={`relative block truncate px-1 pt-2 pb-2.5 text-center text-[11px] font-bold tracking-[0.14em] uppercase transition-colors ${
+                    className={`relative block truncate px-1 pt-2 pb-2.5 text-center text-[0.6875rem] font-bold tracking-[0.14em] uppercase transition-colors ${
                       i === index ? "text-brand-red" : i < index ? "text-brand-charcoal" : "text-zinc-500"
                     }`}
                   >

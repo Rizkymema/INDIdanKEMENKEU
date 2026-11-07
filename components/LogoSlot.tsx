@@ -26,7 +26,7 @@ export default function LogoSlot({
   className = "h-10 w-28",
   variant = "box",
   tone = "light",
-  sizes = "160px",
+  sizes = "320px",
 }: Props) {
   if (logo.src) {
     return (
@@ -48,7 +48,7 @@ export default function LogoSlot({
       >
         <span className="text-[1.65rem] leading-none font-extrabold tracking-[-0.06em]">{logo.name}</span>
         {words.length > 0 ? (
-          <span className={`text-[7px] leading-[1.15] font-semibold tracking-[0.08em] uppercase ${light ? "text-white/90" : "text-brand-charcoal/70"}`}>
+          <span className={`text-[0.4375rem] leading-[1.15] font-semibold tracking-[0.08em] uppercase ${light ? "text-white/90" : "text-brand-charcoal/70"}`}>
             {words.map((w) => (
               <span key={w} className="block">
                 {w}
@@ -65,7 +65,7 @@ export default function LogoSlot({
       <span
         role="img"
         aria-label={`Logo ${logo.name} (placeholder)`}
-        className={`inline-flex shrink-0 items-center rounded-full border px-3 py-1 text-[11px] font-semibold tracking-wide ${
+        className={`inline-flex shrink-0 items-center rounded-full border px-3 py-1 text-[0.6875rem] font-semibold tracking-wide ${
           light ? "border-white/35 text-white/90" : "border-zinc-300 text-zinc-600"
         }`}
       >

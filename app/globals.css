@@ -38,6 +38,14 @@
    ========================================================================== */
 
 html {
+  /*
+   * Skala proporsional: di layar ≥1152px, ukuran dasar (1rem) ikut membesar
+   * sesuai lebar layar sehingga isi halaman selalu memenuhi lebar layar —
+   * tidak ada ruang kosong di kiri-kanan, berapa pun lebar layar/level zoom.
+   * Semua ukuran memakai rem, jadi teks, jarak, dan kartu ikut menskala.
+   * `100%` menghormati ukuran huruf default pilihan pengguna di browser.
+   */
+  font-size: max(100%, calc(100vw / 72));
   scroll-behavior: smooth;
   /* Ruang untuk navbar + progress bar timeline saat lompat ke anchor */
   scroll-padding-top: 6.5rem;

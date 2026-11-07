@@ -60,7 +60,7 @@ export default function SessionGallery({ session, anchorId, order, dayLabel }: P
               {session.title}
             </h3>
           </div>
-          <p className="text-[15px] leading-relaxed text-zinc-600 md:col-span-8">{session.description}</p>
+          <p className="text-[0.9375rem] leading-relaxed text-zinc-600 md:col-span-8">{session.description}</p>
         </div>
       </Reveal>
 

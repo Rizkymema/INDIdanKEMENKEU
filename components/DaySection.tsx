@@ -23,7 +23,7 @@ export default function DaySection({ day, index }: Props) {
       {/* Header hari */}
       <header data-surface="dark" className="bg-brand-gradient relative isolate overflow-hidden text-white">
         <CurvePattern className="-z-10 text-white opacity-20" lines={30} />
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8 xl:px-15">
           <Reveal className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <div className="max-w-3xl">
               <p className="eyebrow flex items-center gap-2 text-white/85">
@@ -34,12 +34,12 @@ export default function DaySection({ day, index }: Props) {
                 {day.title}
               </h2>
               {day.summary ? (
-                <p className="mt-4 text-[15px] leading-relaxed text-white/90 sm:text-base">{day.summary}</p>
+                <p className="mt-4 text-[0.9375rem] leading-relaxed text-white/90 sm:text-base">{day.summary}</p>
               ) : null}
             </div>
 
             <div className="flex shrink-0 flex-col items-start gap-2 md:items-end md:text-right">
-              <span className="rounded-sm bg-white px-2.5 py-1 text-[11px] font-extrabold tracking-[0.18em] text-brand-red uppercase">
+              <span className="rounded-sm bg-white px-2.5 py-1 text-[0.6875rem] font-extrabold tracking-[0.18em] text-brand-red uppercase">
                 {day.label}
               </span>
               <span className="text-sm font-bold">
@@ -58,7 +58,7 @@ export default function DaySection({ day, index }: Props) {
                       href={`#${day.id}-${session.id}`}
                       className="inline-flex items-center gap-2 text-sm font-semibold text-white/85 transition-colors hover:text-white"
                     >
-                      <span className="text-[11px] font-bold text-white/60">{String(i + 1).padStart(2, "0")}</span>
+                      <span className="text-[0.6875rem] font-bold text-white/60">{String(i + 1).padStart(2, "0")}</span>
                       <span className="underline-offset-4 hover:underline">{session.title}</span>
                     </a>
                   </li>
@@ -70,7 +70,7 @@ export default function DaySection({ day, index }: Props) {
       </header>
 
       {/* Isi: sesi & galeri */}
-      <div className="mx-auto max-w-6xl space-y-16 px-4 py-16 sm:space-y-20 sm:px-6 sm:py-20 lg:px-8">
+      <div className="mx-auto max-w-6xl space-y-16 px-4 py-16 sm:space-y-20 sm:px-6 sm:py-20 lg:px-8 xl:px-15">
         {day.sessions.map((session, i) => (
           <SessionGallery
             key={session.id}
